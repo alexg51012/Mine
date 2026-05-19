@@ -1,8 +1,16 @@
 export default function App() {
   return (
-    <div>
-      <h1>67</h1>
-      <p>where mango and mustard combine</p>
+    <div style={{
+      height: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontSize: "10rem",
+      fontWeight: "900",
+      color: "orange",
+      background: "black"
+    }}>
+      67
     </div>
   );
 }

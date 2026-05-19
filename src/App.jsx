@@ -1,7 +1,13 @@
+import "./index.css";
+
 export default function App() {
   return (
-    <main>
-      <h1>Hello, React</h1>
-    </main>
-  )
+    <div className="container">
+      <div className="text">
+        where mango and mustard combine
+      </div>
+
+      <div className="glitch67">67</div>
+    </div>
+  );
 }

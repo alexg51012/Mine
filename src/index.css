@@ -10,30 +10,27 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-
   font-family: Arial, sans-serif;
 
-  background: radial-gradient(circle at top, #ffb300, #ff7b00, #111);
+  animation: bgShift 6s infinite linear;
+  background: linear-gradient(45deg, #ffb300, #ff7b00, #00c9ff, #ff00ff);
+  background-size: 400% 400%;
 }
 
-/* animated grid */
-body::before {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background:
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  transform: rotate(15deg);
-  animation: moveGrid 10s linear infinite;
-  opacity: 0.4;
-}
-
-@keyframes moveGrid {
-  from { transform: translate(0,0) rotate(15deg); }
-  to { transform: translate(-50px,-50px) rotate(15deg); }
+/* animated moving background */
+@keyframes bgShift {
+  0% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(180deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(360deg);
+  }
 }
 
 .container {
@@ -41,12 +38,12 @@ body::before {
   padding: 60px;
   border-radius: 30px;
 
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(18px);
 
   border: 1px solid rgba(255,255,255,0.2);
 
-  box-shadow: 0 0 60px rgba(255,180,0,0.4);
+  box-shadow: 0 0 80px rgba(255,200,0,0.4);
 
   animation: float 3s ease-in-out infinite;
 }
@@ -56,17 +53,20 @@ body::before {
   font-weight: 800;
   color: white;
   margin-bottom: 20px;
+
+  animation: textColor 3s infinite linear;
 }
 
+/* 67 glitch */
 .glitch67 {
   font-size: 7rem;
   font-weight: 900;
-  color: white;
   position: relative;
 
-  animation: hue 2s infinite linear;
+  animation: numberColor 2s infinite linear;
 }
 
+/* glitch layers */
 .glitch67::before,
 .glitch67::after {
   content: "67";
@@ -76,34 +76,48 @@ body::before {
 }
 
 .glitch67::before {
-  color: #ff00ff;
+  color: magenta;
   transform: translate(-4px, 2px);
-  animation: glitch1 0.8s infinite;
+  animation: glitch1 0.6s infinite;
 }
 
 .glitch67::after {
-  color: #00ffff;
+  color: cyan;
   transform: translate(4px, -2px);
-  animation: glitch2 0.8s infinite;
+  animation: glitch2 0.6s infinite;
 }
 
 /* animations */
 @keyframes float {
-  0%,100% { transform: translateY(0); }
+  0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
 }
 
-@keyframes hue {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+/* text color shifting */
+@keyframes textColor {
+  0% { color: #ffffff; }
+  25% { color: #ffb300; }
+  50% { color: #00ffff; }
+  75% { color: #ff00ff; }
+  100% { color: #ffffff; }
 }
 
+/* number color shifting */
+@keyframes numberColor {
+  0% { color: #ffb300; }
+  25% { color: #00c9ff; }
+  50% { color: #ff00ff; }
+  75% { color: #ffffff; }
+  100% { color: #ffb300; }
+}
+
+/* glitch movement */
 @keyframes glitch1 {
-  0%,100% { transform: translate(-4px,2px); }
-  50% { transform: translate(-6px,-2px); }
+  0%, 100% { transform: translate(-4px, 2px); }
+  50% { transform: translate(-6px, -2px); }
 }
 
 @keyframes glitch2 {
-  0%,100% { transform: translate(4px,-2px); }
-  50% { transform: translate(6px,2px); }
+  0%, 100% { transform: translate(4px, -2px); }
+  50% { transform: translate(6px, 2px); }
 }

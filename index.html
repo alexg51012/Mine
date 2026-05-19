@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mango & Mustard 67 Effect</title>
+<title>67 Effect</title>
 
 <style>
 *{
@@ -27,7 +27,7 @@ body{
   );
 }
 
-/* moving glow grid */
+/* moving grid */
 body::before{
   content:"";
   position:absolute;
@@ -37,8 +37,8 @@ body::before{
     linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
   background-size:50px 50px;
-  animation:moveGrid 10s linear infinite;
   transform:rotate(15deg);
+  animation:moveGrid 10s linear infinite;
   opacity:0.4;
 }
 
@@ -47,7 +47,6 @@ body::before{
   to{transform:translate(-50px,-50px) rotate(15deg);}
 }
 
-/* center card */
 .card{
   position:relative;
   padding:60px 80px;
@@ -66,46 +65,44 @@ body::before{
   animation:float 3s ease-in-out infinite;
 }
 
-/* glitch text */
 .text{
-  font-size:3rem;
+  font-size:2.5rem;
   font-weight:900;
   color:white;
-  position:relative;
   text-transform:uppercase;
   letter-spacing:2px;
-
-  animation:rgbShift 2s infinite alternate;
 }
 
-.text::before,
-.text::after{
-  content:attr(data-text);
+/* 67 glitch core */
+.glitch67{
+  font-size:7rem;
+  font-weight:900;
+  margin-top:20px;
+  position:relative;
+  color:white;
+
+  animation:rgbShift 1.5s infinite linear;
+}
+
+.glitch67::before,
+.glitch67::after{
+  content:"67";
   position:absolute;
-  left:0;
   top:0;
+  left:0;
   width:100%;
 }
 
-.text::before{
+.glitch67::before{
   color:#ff00ff;
-  z-index:-1;
-  transform:translateX(-3px);
-  animation:glitch1 1s infinite;
+  transform:translate(-4px,2px);
+  animation:glitch1 0.8s infinite;
 }
 
-.text::after{
+.glitch67::after{
   color:#00ffff;
-  z-index:-2;
-  transform:translateX(3px);
-  animation:glitch2 1s infinite;
-}
-
-/* mango + mustard */
-.icons{
-  font-size:4rem;
-  margin-top:20px;
-  animation:spin 6s linear infinite;
+  transform:translate(4px,-2px);
+  animation:glitch2 0.8s infinite;
 }
 
 /* animations */
@@ -120,25 +117,15 @@ body::before{
 }
 
 @keyframes glitch1{
-  0%,100%{transform:translate(0,0);}
-  25%{transform:translate(-2px,2px);}
-  50%{transform:translate(-4px,-2px);}
-  75%{transform:translate(-2px,1px);}
+  0%,100%{transform:translate(-4px,2px);}
+  50%{transform:translate(-6px,-2px);}
 }
 
 @keyframes glitch2{
-  0%,100%{transform:translate(0,0);}
-  25%{transform:translate(2px,-2px);}
-  50%{transform:translate(4px,2px);}
-  75%{transform:translate(2px,-1px);}
+  0%,100%{transform:translate(4px,-2px);}
+  50%{transform:translate(6px,2px);}
 }
 
-@keyframes spin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
-}
-
-/* scanlines */
 .scanlines{
   position:absolute;
   width:100%;
@@ -161,13 +148,8 @@ body::before{
 <div class="scanlines"></div>
 
 <div class="card">
-  <div class="text" data-text="where mango and mustard combine">
-    where mango and mustard combine
-  </div>
-
-  <div class="icons">
-    🥭 + 🟡🧴
-  </div>
+  <div class="text">where mango and mustard combine</div>
+  <div class="glitch67">67</div>
 </div>
 
 </body>

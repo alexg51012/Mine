@@ -1,359 +1,174 @@
-```html
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mango & Mustard</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mango & Mustard 67 Effect</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    body {
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Trebuchet MS", sans-serif;
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  font-family:Arial, sans-serif;
 
-      background: linear-gradient(
-        -45deg,
-        #ffb300,
-        #ff8c42,
-        #ffd447,
-        #d4a017,
-        #ff7b00,
-        #ffc93c
-      );
+  background: radial-gradient(circle at top,
+    #ffb300,
+    #ff7b00,
+    #111
+  );
+}
 
-      background-size: 500% 500%;
-      animation: backgroundFlow 18s ease infinite;
-      position: relative;
-    }
+/* moving glow grid */
+body::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size:50px 50px;
+  animation:moveGrid 10s linear infinite;
+  transform:rotate(15deg);
+  opacity:0.4;
+}
 
-    body::before {
-      content: "";
-      position: absolute;
-      width: 140%;
-      height: 140%;
+@keyframes moveGrid{
+  from{transform:translate(0,0) rotate(15deg);}
+  to{transform:translate(-50px,-50px) rotate(15deg);}
+}
 
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2), transparent 20%),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.15), transparent 25%),
-        radial-gradient(circle at 30% 80%, rgba(255,255,255,0.18), transparent 20%),
-        radial-gradient(circle at 70% 70%, rgba(255,255,255,0.12), transparent 20%);
+/* center card */
+.card{
+  position:relative;
+  padding:60px 80px;
+  border-radius:30px;
+  text-align:center;
 
-      animation: floatingLights 20s linear infinite;
-      z-index: 0;
-    }
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(15px);
 
-    .container {
-      position: relative;
-      z-index: 2;
+  border:1px solid rgba(255,255,255,0.2);
 
-      padding: 50px 70px;
-      border-radius: 35px;
+  box-shadow:
+    0 0 40px rgba(255,180,0,0.4),
+    0 0 80px rgba(255,80,0,0.2);
 
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(16px);
+  animation:float 3s ease-in-out infinite;
+}
 
-      border: 2px solid rgba(255,255,255,0.2);
+/* glitch text */
+.text{
+  font-size:3rem;
+  font-weight:900;
+  color:white;
+  position:relative;
+  text-transform:uppercase;
+  letter-spacing:2px;
 
-      box-shadow:
-        0 10px 40px rgba(0,0,0,0.25),
-        0 0 40px rgba(255,215,0,0.3);
+  animation:rgbShift 2s infinite alternate;
+}
 
-      text-align: center;
+.text::before,
+.text::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+}
 
-      animation:
-        floatCard 5s ease-in-out infinite,
-        glowPulse 4s ease-in-out infinite;
-    }
+.text::before{
+  color:#ff00ff;
+  z-index:-1;
+  transform:translateX(-3px);
+  animation:glitch1 1s infinite;
+}
 
-    .title {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 900;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+.text::after{
+  color:#00ffff;
+  z-index:-2;
+  transform:translateX(3px);
+  animation:glitch2 1s infinite;
+}
 
-      background: linear-gradient(
-        90deg,
-        #ffffff,
-        #fff176,
-        #ff9800,
-        #ffffff,
-        #ffd54f,
-        #ff6f00,
-        #ffffff
-      );
+/* mango + mustard */
+.icons{
+  font-size:4rem;
+  margin-top:20px;
+  animation:spin 6s linear infinite;
+}
 
-      background-size: 400% 400%;
+/* animations */
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
 
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+@keyframes rgbShift{
+  0%{filter:hue-rotate(0deg);}
+  100%{filter:hue-rotate(360deg);}
+}
 
-      animation:
-        rainbowText 6s ease infinite,
-        textGlow 3s ease-in-out infinite;
+@keyframes glitch1{
+  0%,100%{transform:translate(0,0);}
+  25%{transform:translate(-2px,2px);}
+  50%{transform:translate(-4px,-2px);}
+  75%{transform:translate(-2px,1px);}
+}
 
-      text-shadow:
-        0 0 10px rgba(255,255,255,0.4),
-        0 0 20px rgba(255,200,0,0.5);
-    }
+@keyframes glitch2{
+  0%,100%{transform:translate(0,0);}
+  25%{transform:translate(2px,-2px);}
+  50%{transform:translate(4px,2px);}
+  75%{transform:translate(2px,-1px);}
+}
 
-    .subtitle {
-      margin-top: 18px;
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.85);
-      letter-spacing: 1px;
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
 
-      animation: fadeIn 3s ease;
-    }
-
-    .spark {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: white;
-      opacity: 0.8;
-      animation: sparkle 6s linear infinite;
-    }
-
-    .spark:nth-child(1) {
-      top: 10%;
-      left: 15%;
-      animation-delay: 0s;
-    }
-
-    .spark:nth-child(2) {
-      top: 20%;
-      left: 80%;
-      animation-delay: 1s;
-    }
-
-    .spark:nth-child(3) {
-      top: 75%;
-      left: 20%;
-      animation-delay: 2s;
-    }
-
-    .spark:nth-child(4) {
-      top: 85%;
-      left: 75%;
-      animation-delay: 3s;
-    }
-
-    .spark:nth-child(5) {
-      top: 50%;
-      left: 50%;
-      animation-delay: 4s;
-    }
-
-    .spark:nth-child(6) {
-      top: 35%;
-      left: 35%;
-      animation-delay: 5s;
-    }
-
-    .ring {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-
-      border: 2px solid rgba(255,255,255,0.08);
-
-      animation: rotateRing 20s linear infinite;
-    }
-
-    .ring2 {
-      width: 700px;
-      height: 700px;
-      animation-direction: reverse;
-      animation-duration: 30s;
-    }
-
-    .ring3 {
-      width: 900px;
-      height: 900px;
-      animation-duration: 40s;
-    }
-
-    @keyframes backgroundFlow {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    @keyframes rainbowText {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    @keyframes floatCard {
-      0% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-15px);
-      }
-
-      100% {
-        transform: translateY(0px);
-      }
-    }
-
-    @keyframes glowPulse {
-      0% {
-        box-shadow:
-          0 10px 40px rgba(0,0,0,0.25),
-          0 0 30px rgba(255,200,0,0.2);
-      }
-
-      50% {
-        box-shadow:
-          0 10px 50px rgba(0,0,0,0.35),
-          0 0 60px rgba(255,220,0,0.5);
-      }
-
-      100% {
-        box-shadow:
-          0 10px 40px rgba(0,0,0,0.25),
-          0 0 30px rgba(255,200,0,0.2);
-      }
-    }
-
-    @keyframes textGlow {
-      0% {
-        filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
-      }
-
-      50% {
-        filter: drop-shadow(0 0 20px rgba(255,255,255,0.8));
-      }
-
-      100% {
-        filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
-      }
-    }
-
-    @keyframes sparkle {
-      0% {
-        transform: scale(0) translateY(0);
-        opacity: 0;
-      }
-
-      25% {
-        opacity: 1;
-      }
-
-      50% {
-        transform: scale(1.5) translateY(-20px);
-        opacity: 0.8;
-      }
-
-      100% {
-        transform: scale(0) translateY(-50px);
-        opacity: 0;
-      }
-    }
-
-    @keyframes rotateRing {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes floatingLights {
-      0% {
-        transform: translateY(0px) rotate(0deg);
-      }
-
-      50% {
-        transform: translateY(-30px) rotate(180deg);
-      }
-
-      100% {
-        transform: translateY(0px) rotate(360deg);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0px);
-      }
-    }
-
-    @media (max-width: 700px) {
-      .container {
-        width: 90%;
-        padding: 35px 20px;
-      }
-
-      .subtitle {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
+/* scanlines */
+.scanlines{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.05) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events:none;
+  mix-blend-mode:overlay;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="ring"></div>
-  <div class="ring ring2"></div>
-  <div class="ring ring3"></div>
+<div class="scanlines"></div>
 
-  <div class="spark"></div>
-  <div class="spark"></div>
-  <div class="spark"></div>
-  <div class="spark"></div>
-  <div class="spark"></div>
-  <div class="spark"></div>
-
-  <div class="container">
-    <div class="title">
-      where mango and mustard combine
-    </div>
-
-    <div class="subtitle">
-      vibrant • smooth • glowing • animated
-    </div>
+<div class="card">
+  <div class="text" data-text="where mango and mustard combine">
+    where mango and mustard combine
   </div>
+
+  <div class="icons">
+    🥭 + 🟡🧴
+  </div>
+</div>
 
 </body>
 </html>
-```

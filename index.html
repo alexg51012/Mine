@@ -1,41 +1,46 @@
-```html
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Colorful React App</title>
+    <title>Mango & Mustard</title>
 
     <style>
       body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(
-          135deg,
-          #ff6b6b,
-          #ffb347,
-          #6a5acd,
-          #00c9a7
-        );
-        background-size: 400% 400%;
-        animation: gradientMove 12s ease infinite;
-        min-height: 100vh;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        font-family: Arial, sans-serif;
+
+        background: linear-gradient(
+          135deg,
+          #ffb300,
+          #ffc93c,
+          #ff8c42,
+          #d4a017
+        );
+
+        background-size: 400% 400%;
+        animation: gradientMove 10s ease infinite;
       }
 
-      #root {
-        width: 90%;
-        max-width: 1000px;
-        min-height: 80vh;
+      .center-text {
+        text-align: center;
+        color: white;
+        font-size: 3rem;
+        font-weight: bold;
+        padding: 30px 50px;
+        border-radius: 25px;
+
         background: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(12px);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-radius: 24px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        padding: 20px;
+        backdrop-filter: blur(10px);
+
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+        animation: float 3s ease-in-out infinite;
       }
 
       @keyframes gradientMove {
@@ -49,13 +54,24 @@
           background-position: 0% 50%;
         }
       }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
     </style>
   </head>
 
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div class="center-text">
+      where mango and mustard combine
+    </div>
   </body>
 </html>
-```
-
